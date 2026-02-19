@@ -1,0 +1,76 @@
+# Training Configuration for Code Generation RL Agent
+# This file contains all hyperparameters and settings for training
+
+# Environment Settings
+environment:
+  max_steps: 50  # Maximum steps per episode
+  vocab_size: 5000  # Size of code token vocabulary
+  render_frequency: 100  # Render environment every N episodes
+
+# Agent Settings (DQN Hyperparameters)
+agent:
+  # Network Architecture
+  state_dim: 520  # Dimension of state observation
+  action_dim: 5000  # Number of possible actions
+  hidden_dim: 512  # Hidden layer size for neural network
+
+  # Learning Parameters
+  learning_rate: 0.0001  # Learning rate (α) for optimizer
+  gamma: 0.99  # Discount factor (γ) - weight of future rewards
+
+  # Exploration (Epsilon-Greedy)
+  epsilon_start: 1.0  # Initial exploration rate
+  epsilon_end: 0.01  # Minimum exploration rate
+  epsilon_decay: 0.995  # Decay rate per episode
+
+  # Experience Replay
+  buffer_capacity: 50000  # Maximum size of replay buffer
+  batch_size: 64  # Mini-batch size for training
+  min_buffer_size: 1000  # Minimum buffer size before training starts
+
+  # Target Network
+  target_update_frequency: 10  # Update target network every N episodes
+
+  # Device
+  device: 'cpu'  # 'cpu' or 'cuda' for GPU training
+
+# Training Settings
+training:
+  num_episodes: 5000  # Total number of training episodes
+  max_timesteps: 50  # Maximum timesteps per episode
+  train_frequency: 1  # Train agent every N steps
+  eval_frequency: 50  # Evaluate agent every N episodes
+  save_frequency: 100  # Save checkpoint every N episodes
+
+  # Logging
+  log_frequency: 10  # Log metrics every N episodes
+  log_dir: 'experiments/logs'  # Directory for training logs
+
+  # Checkpoints
+  checkpoint_dir: 'experiments/models'  # Directory for model checkpoints
+  save_best_only: false  # Only save model when performance improves
+
+# Reward Settings
+reward:
+  type: 'code_quality'  # 'code_quality', 'sparse', or 'curriculum'
+
+  # CodeQualityReward weights
+  correctness_weight: 10.0
+  quality_weight: 2.0
+  efficiency_weight: 1.0
+  progress_weight: 0.5
+
+# Evaluation Settings
+evaluation:
+  num_episodes: 20  # Number of episodes for evaluation
+  deterministic: true  # Use deterministic policy (no exploration)
+  render: false  # Render episodes during evaluation
+
+# Data Settings
+data:
+  problems_file: 'data/examples/training_problems.json'  # Training problems
+  eval_problems_file: 'data/examples/eval_problems.json'  # Evaluation problems
+
+# Miscellaneous
+seed: 42  # Random seed for reproducibility
+verbose: true  # Print detailed training information

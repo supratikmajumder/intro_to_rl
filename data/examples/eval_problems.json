@@ -1,0 +1,37 @@
+[
+  {
+    "function_name": "multiply",
+    "docstring": "Return the product of two numbers.",
+    "test_cases": [
+      [[2, 3], 6],
+      [[0, 5], 0],
+      [[-2, 3], -6],
+      [[4, 5], 20]
+    ],
+    "starter_code": ""
+  },
+  {
+    "function_name": "is_prime",
+    "docstring": "Return True if number is prime, False otherwise.",
+    "test_cases": [
+      [2, true],
+      [3, true],
+      [4, false],
+      [17, true],
+      [1, false],
+      [0, false]
+    ],
+    "starter_code": ""
+  },
+  {
+    "function_name": "find_min",
+    "docstring": "Return the minimum value in a list.",
+    "test_cases": [
+      [[1, 2, 3], 1],
+      [[5, 2, 8, 1], 1],
+      [[-1, -5, -3], -5],
+      [[10], 10]
+    ],
+    "starter_code": ""
+  }
+]

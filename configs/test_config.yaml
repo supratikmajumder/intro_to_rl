@@ -1,0 +1,42 @@
+environment:
+  max_steps: 20
+  vocab_size: 1000
+agent:
+  state_dim: 520
+  action_dim: 1000
+  hidden_dim: 256
+  learning_rate: 0.001
+  gamma: 0.99
+  epsilon_start: 1.0
+  epsilon_end: 0.1
+  epsilon_decay: 0.99
+  buffer_capacity: 1000
+  batch_size: 32
+  min_buffer_size: 100
+  target_update_frequency: 5
+  device: 'cpu'
+training:
+  num_episodes: 50
+  max_timesteps: 20
+  train_frequency: 1
+  eval_frequency: 25
+  save_frequency: 25
+  log_frequency: 10
+  log_dir: 'experiments/test_logs'
+  checkpoint_dir: 'experiments/test_models'
+  save_best_only: false
+reward:
+  type: 'code_quality'
+  correctness_weight: 10.0
+  quality_weight: 2.0
+  efficiency_weight: 1.0
+  progress_weight: 0.5
+evaluation:
+  num_episodes: 5
+  deterministic: true
+  render: false
+data:
+  problems_file: 'data/examples/training_problems.json'
+  eval_problems_file: 'data/examples/eval_problems.json'
+seed: 42
+verbose: true
