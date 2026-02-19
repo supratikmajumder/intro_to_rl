@@ -70,6 +70,11 @@ def train(config_path: str = 'configs/train_config.yaml'):
     print(f"\nLoading configuration from {config_path}")
     config = load_config(config_path)
 
+    # CPU Optimization: Use all available CPU threads
+    num_threads = os.cpu_count() or 4
+    torch.set_num_threads(num_threads)
+    print(f"PyTorch using {num_threads} CPU threads")
+
     # Set random seed for reproducibility
     seed = config.get('seed', 42)
     set_random_seed(seed)

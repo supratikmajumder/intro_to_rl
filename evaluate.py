@@ -64,7 +64,7 @@ def evaluate_model(model_path: str,
             print(f"  {i+1}. {prob['function_name']}: {len(prob['test_cases'])} test cases")
 
     # Initialize environment
-    env = CodeGenerationEnv(problems=problems, max_steps=20, vocab_size=1000)
+    env = CodeGenerationEnv(problems=problems, max_steps=50, vocab_size=5000)
 
     # Initialize agent
     if verbose:
@@ -72,7 +72,7 @@ def evaluate_model(model_path: str,
 
     agent = DQNAgent(
         state_dim=520,
-        action_dim=1000,
+        action_dim=5000,
         learning_rate=1e-4,
         gamma=0.99
     )

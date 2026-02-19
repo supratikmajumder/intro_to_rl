@@ -1,0 +1,51 @@
+# Fast Training Configuration - Optimized for Mac
+# Estimated time: 5-10 minutes (vs 90+ minutes for full training)
+
+environment:
+  max_steps: 30           # Shorter episodes (vs 50)
+  vocab_size: 1000        # Smaller action space (vs 5000) - 5x speedup
+
+agent:
+  state_dim: 520
+  action_dim: 1000        # Match vocab_size
+  hidden_dim: 256         # Smaller network (vs 512) - 2x speedup
+  learning_rate: 0.000001 # Ultra-stable (1e-6)
+  gamma: 0.99
+  epsilon_start: 1.0
+  epsilon_end: 0.01
+  epsilon_decay: 0.995
+  buffer_capacity: 10000  # Smaller buffer (vs 50000)
+  batch_size: 32          # Smaller batches (vs 64)
+  min_buffer_size: 500    # Start training sooner (vs 1000)
+  target_update_frequency: 10
+  device: 'mps'           # Apple GPU! 🚀 (2-5x speedup)
+
+training:
+  num_episodes: 2000      # Shorter training (vs 5000) - 2.5x speedup
+  max_timesteps: 30
+  train_frequency: 1
+  eval_frequency: 100     # Less frequent (vs 50)
+  save_frequency: 500     # Less frequent (vs 100)
+  log_frequency: 20
+  log_dir: 'experiments/fast_logs'
+  checkpoint_dir: 'experiments/fast_models'
+  save_best_only: false
+
+reward:
+  type: 'code_quality'
+  correctness_weight: 10.0
+  quality_weight: 2.0
+  efficiency_weight: 1.0
+  progress_weight: 0.5
+
+evaluation:
+  num_episodes: 10        # Fewer eval episodes (vs 20)
+  deterministic: true
+  render: false
+
+data:
+  problems_file: 'data/examples/training_problems.json'
+  eval_problems_file: 'data/examples/eval_problems.json'
+
+seed: 42
+verbose: true
